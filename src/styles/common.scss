@@ -1,0 +1,21 @@
+body{
+    margin: 0
+}
+.ie-fixMinHeight {
+    display:flex;
+}
+
+.wrapper {
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+}
+
+.main {
+    flex-grow:1;
+}
+
+.no-decoration{
+    text-decoration: none!important;
+}

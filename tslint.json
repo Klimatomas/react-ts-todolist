@@ -1,0 +1,20 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended",
+        "tslint-config-prettier"
+    ],
+    "jsRules": {
+
+    },
+    "rules": {
+        "align": false,
+        "jsx-no-braces-for-string-attributes": true,
+        "no-console": false,
+        "no-unused-expression": [true, "allow-fast-null-checks"],
+        "quotemark":true
+    },
+    "rulesDirectory": [
+        "./node_modules/tslint-misc-rules/rules"
+    ]
+}
