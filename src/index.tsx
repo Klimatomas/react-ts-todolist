@@ -3,18 +3,18 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { createStore } from "redux";
 import "../src/styles/index.scss";
-import reducer from "./reducers/index";
+import combineReducers from "./reducers/index";
 
 import { Provider } from "react-redux";
 
-import { IStoreInterface } from "./interface";
+import { StoreState } from "./actionTypes";
 import Routes from "./routes";
 
-const initialStoreState: IStoreInterface = {
-  ToDoList: []
+const initialStoreState: StoreState = {
+  toDoList: []
 };
 
-export const store = createStore(reducer, initialStoreState);
+export const store = createStore(combineReducers, initialStoreState);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -24,11 +24,5 @@ ReactDOM.render(
 );
 
 store.subscribe(() => {
-  console.log(
-    "%c Store state changed: ",
-    "color: yellow; font-size:25px",
-    store.getState()
-  );
+  console.log("%c Store state changed: ", "color: yellow;", store.getState());
 });
-
-store.dispatch({ type: "asd" });

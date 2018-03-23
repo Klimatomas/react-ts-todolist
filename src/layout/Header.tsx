@@ -5,9 +5,9 @@ class Header extends React.Component<{}, {}> {
   public render() {
     return (
       <>
-        <header className="row bg-dark navbar-header">
-          <div className="col-1">
-            <Link to="/" className="text-white no-decoration">
+        <header className="">
+          <div className="">
+            <Link to="/" className="no-decoration">
               App Header
             </Link>
           </div>

@@ -8,7 +8,7 @@ module.exports = {
   },
   plugins: [new HtmlWebpackPlugin({
     template: "index.html",
-    title: "Tomáš Klíma"
+    title: "ts-react-todolist"
   })],
   // Enable sourcemaps for debugging webpack's output.
   devtool: "source-map",
