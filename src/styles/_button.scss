@@ -1,0 +1,28 @@
+@mixin button($background-color) {
+  $darkened-color: darken($background-color, 10%);
+  background-color: $background-color;
+  border: 1px solid $darkened-color;
+  cursor: pointer;
+  &:active {
+    &:hover {
+      background-color: $darkened-color;
+    }
+  }
+}
+.btn {
+  @include button($background-color: white);
+  border-radius: 3px;
+  padding: 3px 10px 3px 10px;
+  outline: none;
+}
+
+.btn--danger {
+  @include button($background-color: red);
+}
+
+.btn--glyphicon{
+    @include button($background-color: white);
+    float: right;
+    border: none;
+    padding: 0;
+}

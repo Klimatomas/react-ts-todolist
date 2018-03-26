@@ -5,12 +5,8 @@ class Header extends React.Component<{}, {}> {
   public render() {
     return (
       <>
-        <header className="">
-          <div className="">
-            <Link to="/" className="no-decoration">
-              App Header
-            </Link>
-          </div>
+        <header className="app-header">
+          <div className="">TO DO LIST</div>
         </header>
       </>
     );

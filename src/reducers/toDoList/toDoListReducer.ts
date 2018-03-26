@@ -4,12 +4,9 @@ import { IToDo, TypeKeys } from "../../interfaces";
 export function toDoListReducer(toDoList: IToDo[] = [], action: ActionTypes) {
   switch (action.type) {
     case TypeKeys.SUBMIT_NEW_TODO_ACTION:
-      toDoList.push({
-        completed: false,
-        content: action.payload,
-        dateInserted: "15.15.2018"
-      });
-      return toDoList
+      return action.payload;
+    case TypeKeys.DELETE_TODO_ACTION:
+      return action.payload;
     default:
       return toDoList;
   }

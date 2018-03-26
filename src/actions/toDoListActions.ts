@@ -1,9 +1,16 @@
 import { ActionTypes } from "../actionTypes";
-import { TypeKeys } from "../interfaces";
+import { IToDo, TypeKeys } from "../interfaces";
 
-export function submitNewToDoAction(todoText: string): ActionTypes { 
+export function submitNewToDoAction(newToDoArray: IToDo[]): ActionTypes { 
     return{
-        payload: todoText,
+        payload: newToDoArray,
         type: TypeKeys.SUBMIT_NEW_TODO_ACTION,
+    }
+}
+
+export function deleteToDoAction(newToDoArray: IToDo[]): ActionTypes { 
+    return{
+        payload: newToDoArray,
+        type: TypeKeys.DELETE_TODO_ACTION,
     }
 }
