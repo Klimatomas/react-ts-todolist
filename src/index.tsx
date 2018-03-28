@@ -7,7 +7,6 @@ import combineReducers from "./reducers/index";
 
 import { Provider } from "react-redux";
 
-import { deleteToDoAction } from "./actions/toDoListActions";
 import { StoreState } from "./actionTypes";
 import Routes from "./routes";
 

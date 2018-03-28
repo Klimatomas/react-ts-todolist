@@ -1,18 +1,19 @@
 import React = require("react");
 import { connect, Dispatch } from "react-redux";
 import {
-  deleteToDoAction,
-  submitNewToDoAction
+  submitNewToDoAction,
+  toggleToDoAction
 } from "../actions/toDoListActions";
 import { ActionTypes, StoreState } from "../actionTypes";
 import { IToDo } from "../interfaces";
 import { mergeProps } from "../util/componentHelper";
 import EmptyToDoList from "./EmptyToDoList";
+import ListOfToDos from "./ListOfToDos";
 
 interface IToDoListProps {
   toDoList: IToDo[];
   submitNewTodo: (toDoList: IToDo[]) => void;
-  deleteToDo: (toDoList: IToDo[]) => void;
+  toggleToDo: (toDoList: IToDo[]) => void;
 }
 
 interface IToDoListState {
@@ -32,45 +33,36 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
 
   constructor(props: IToDoListProps, state: IToDoListState) {
     super(props, state);
+    this.toggleToDo = this.toggleToDo.bind(this);
     this.handleFormInputChange = this.handleFormInputChange.bind(this);
   }
 
   public render() {
     return (
-      <div className="content">
-        {this.props.toDoList.length > 0 ? (
-          <>
-            <h4>TASKS:</h4>
-            <ul className="list">
-              {this.props.toDoList.map((val, index) => (
-                <li key={index} className="">
-                  {val.content}
-                  <span
-                    className="btn btn--glyphicon"
-                    onClick={() => this.deleteTodo(index)}
-                  >
-                    x
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </>
-        ) : (
-          <EmptyToDoList />
-        )}
-        {/* todo validation */}
-        <form onSubmit={e => this.submitNewTodo(e)}>
-          <input
-            autoFocus
-            type="text"
-            onChange={e => this.handleFormInputChange(e)}
-            value={this.state.formState.todoText}
-          />
-          <button className="btn" type="submit">
-            submit
-          </button>
-        </form>
-      </div>
+      <>
+        <div className="content">
+          {this.props.toDoList.length > 0 ? (
+            <ListOfToDos
+              toDoList={this.props.toDoList}
+              toggleToDo={this.toggleToDo}
+            />
+          ) : (
+            <EmptyToDoList />
+          )}
+          {/* todo validation */}
+          <form onSubmit={e => this.submitNewTodo(e)} className="content__form">
+            <input
+              autoFocus
+              type="text"
+              onChange={e => this.handleFormInputChange(e)}
+              value={this.state.formState.todoText}
+            />
+            <button className="btn" type="submit">
+              submit
+            </button>
+          </form>
+        </div>
+      </>
     );
   }
 
@@ -83,23 +75,30 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
     });
   }
 
-  public deleteTodo(index: number) {
+  public toggleToDo(index: number) {
     const currentToDoList = this.props.toDoList.slice();
-    currentToDoList.splice(index, 1);
-    this.props.deleteToDo(currentToDoList);
-    console.log("deleting", index);
+    currentToDoList[index].completed = !currentToDoList[index].completed;
+    this.props.toggleToDo(currentToDoList);
   }
 
   public submitNewTodo(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const currentToDoList = this.props.toDoList.slice();
-    //  todo rework
-    currentToDoList.push({
-      completed: false,
-      content: this.state.formState.todoText,
-      dateInserted: "today"
-    });
-    this.props.submitNewTodo(currentToDoList);
+    let text = this.state.formState.todoText;
+    if (text.length > 0) {
+      const currentToDoList = this.props.toDoList.slice();
+      //  todo rework
+      text = text.substring(0, 1).toUpperCase() + text.substring(1);
+      currentToDoList.push({
+        completed: false,
+        content: text,
+        dateInserted: "today"
+      });
+      this.props.submitNewTodo(currentToDoList);
+      this.setState({
+        ...this.state,
+        formState: initialTodoListState.formState
+      });
+    }
   }
 }
 
@@ -109,9 +108,9 @@ const mapStateToProps = (store: StoreState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => {
   return {
-    deleteToDo: (todoList: IToDo[]) => dispatch(deleteToDoAction(todoList)),
     submitNewTodo: (todoList: IToDo[]) =>
-      dispatch(submitNewToDoAction(todoList))
+      dispatch(submitNewToDoAction(todoList)),
+    toggleToDo: (todoList: IToDo[]) => dispatch(toggleToDoAction(todoList))
   };
 };
 

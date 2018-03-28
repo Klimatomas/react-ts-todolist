@@ -20,9 +20,8 @@
   @include button($background-color: red);
 }
 
-.btn--glyphicon{
-    @include button($background-color: white);
+.btn--list{
+    @include button($background-color: green);
     float: right;
     border: none;
-    padding: 0;
 }

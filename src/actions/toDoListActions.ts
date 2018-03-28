@@ -8,9 +8,9 @@ export function submitNewToDoAction(newToDoArray: IToDo[]): ActionTypes {
     }
 }
 
-export function deleteToDoAction(newToDoArray: IToDo[]): ActionTypes { 
+export function toggleToDoAction(newToDoArray: IToDo[]): ActionTypes { 
     return{
         payload: newToDoArray,
-        type: TypeKeys.DELETE_TODO_ACTION,
+        type: TypeKeys.TOGGLE_TODO_ACTION,
     }
 }
