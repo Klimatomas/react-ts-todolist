@@ -58,7 +58,7 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
               value={this.state.formState.todoText}
             />
             <button className="btn" type="submit">
-              submit
+              Add to plan
             </button>
           </form>
         </div>
