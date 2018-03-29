@@ -1,6 +1,7 @@
 import React = require("react");
 import { connect, Dispatch } from "react-redux";
 import {
+  deleteToDoAction,
   submitNewToDoAction,
   toggleToDoAction
 } from "../actions/toDoListActions";
@@ -14,6 +15,7 @@ interface IToDoListProps {
   toDoList: IToDo[];
   submitNewTodo: (toDoList: IToDo[]) => void;
   toggleToDo: (toDoList: IToDo[]) => void;
+  deleteToDo: (toDoList: IToDo[]) => void;
 }
 
 interface IToDoListState {
@@ -34,6 +36,7 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
   constructor(props: IToDoListProps, state: IToDoListState) {
     super(props, state);
     this.toggleToDo = this.toggleToDo.bind(this);
+    this.deleteToDo = this.deleteToDo.bind(this);
     this.handleFormInputChange = this.handleFormInputChange.bind(this);
   }
 
@@ -45,6 +48,7 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
             <ListOfToDos
               toDoList={this.props.toDoList}
               toggleToDo={this.toggleToDo}
+              deleteToDo={this.deleteToDo}
             />
           ) : (
             <EmptyToDoList />
@@ -81,6 +85,12 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
     this.props.toggleToDo(currentToDoList);
   }
 
+  public deleteToDo(index: number) {
+    const currentToDoList = this.props.toDoList.slice();
+    currentToDoList.splice(index, 1);
+    this.props.deleteToDo(currentToDoList);
+  }
+
   public submitNewTodo(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     let text = this.state.formState.todoText;
@@ -108,6 +118,7 @@ const mapStateToProps = (store: StoreState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => {
   return {
+    deleteToDo: (todoList: IToDo[]) => dispatch(deleteToDoAction(todoList)),
     submitNewTodo: (todoList: IToDo[]) =>
       dispatch(submitNewToDoAction(todoList)),
     toggleToDo: (todoList: IToDo[]) => dispatch(toggleToDoAction(todoList))

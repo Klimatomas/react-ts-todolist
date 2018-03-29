@@ -7,6 +7,8 @@ export function toDoListReducer(toDoList: IToDo[] = [], action: ActionTypes) {
       return action.payload;
     case TypeKeys.TOGGLE_TODO_ACTION:
       return action.payload;
+      case TypeKeys.DELETE_TODO_ACTION:
+      return action.payload;
     default:
       return toDoList;
   }
