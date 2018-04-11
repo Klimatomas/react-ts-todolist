@@ -14,3 +14,9 @@ export function toggleToDoAction(newToDoArray: IToDo[]): ActionTypes {
         type: TypeKeys.TOGGLE_TODO_ACTION,
     }
 }
+export function deleteToDoAction(newToDoArray: IToDo[]): ActionTypes { 
+    return{
+        payload: newToDoArray,
+        type: TypeKeys.TOGGLE_TODO_ACTION,
+    }
+}
