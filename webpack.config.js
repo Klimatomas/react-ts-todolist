@@ -4,7 +4,7 @@ module.exports = {
   entry: ["babel-polyfill", "./src/index.tsx"],
   output: {
     filename: "bundle.js",
-    path: __dirname + "/dist"
+    path: __dirname + "/dist",
   },
   plugins: [new HtmlWebpackPlugin({
     template: "index.html",
@@ -16,7 +16,9 @@ module.exports = {
   devServer: {
     contentBase: "./dist",
     hot: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {"/": "http://localhost:5000"},
+    
   },
 
   resolve: {

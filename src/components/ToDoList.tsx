@@ -1,3 +1,4 @@
+import axios from "axios";
 import React = require("react");
 import { connect, Dispatch } from "react-redux";
 import {
@@ -9,6 +10,7 @@ import { IToDo } from "../interfaces";
 import { mergeProps } from "../util/componentHelper";
 import EmptyToDoList from "./EmptyToDoList";
 import ListOfToDos from "./ListOfToDos";
+
 
 interface IToDoListProps {
   toDoList: IToDo[];
@@ -35,12 +37,14 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
     super(props, state);
     this.toggleToDo = this.toggleToDo.bind(this);
     this.handleFormInputChange = this.handleFormInputChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   public render() {
     return (
       <>
         <div className="content">
+        <button onClick={this.handleClick}>CLICK ME</button>
           {this.props.toDoList.length > 0 ? (
             <ListOfToDos
               toDoList={this.props.toDoList}
@@ -79,6 +83,11 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
     const currentToDoList = this.props.toDoList.slice();
     currentToDoList[index].completed = !currentToDoList[index].completed;
     this.props.toggleToDo(currentToDoList);
+  }
+
+  public handleClick() {
+    console.log("ahoj")
+    axios.get("/hi").then(() => {console.log("processed")});
   }
 
   public submitNewTodo(e: React.FormEvent<HTMLFormElement>) {
