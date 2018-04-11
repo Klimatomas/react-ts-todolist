@@ -1,4 +1,3 @@
-import axios from "axios";
 import React = require("react");
 import { connect, Dispatch } from "react-redux";
 import {
@@ -40,14 +39,12 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
     this.toggleToDo = this.toggleToDo.bind(this);
     this.deleteToDo = this.deleteToDo.bind(this);
     this.handleFormInputChange = this.handleFormInputChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
 
   public render() {
     return (
       <>
         <div className="content">
-        <button onClick={this.handleClick}>CLICK ME</button>
           {this.props.toDoList.length > 0 ? (
             <ListOfToDos
               toDoList={this.props.toDoList}
@@ -88,10 +85,6 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
     currentToDoList[index].completed = !currentToDoList[index].completed;
     this.props.toggleToDo(currentToDoList);
   }
-
-  public handleClick() {
-    console.log("ahoj")
-    axios.get("/hi").then(() => {console.log("processed")})};
 
   public deleteToDo(index: number) {
     const currentToDoList = this.props.toDoList.slice();
