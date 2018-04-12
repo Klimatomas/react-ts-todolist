@@ -1,5 +1,5 @@
 import React = require("react");
-import { IToDo } from "../interfaces";
+import { IToDo } from "../interfaces/toDoInterface";
 
 interface IListOfToDosProps {
   toDoList: IToDo[];

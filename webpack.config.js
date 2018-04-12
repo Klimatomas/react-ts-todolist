@@ -21,7 +21,7 @@ module.exports = {
     contentBase: "./dist",
     hot: true,
     historyApiFallback: true,
-    proxy: { "/": "http://localhost:5000" }
+    proxy: { "/api": "http://localhost:5000" }
   },
 
   resolve: {
@@ -42,13 +42,6 @@ module.exports = {
           use: ['css-loader', 'sass-loader']
         })
       },
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader"
-        })
-      }
     ]
   }
 

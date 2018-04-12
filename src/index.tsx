@@ -7,6 +7,8 @@ import combineReducers from "./reducers/index";
 
 import { Provider } from "react-redux";
 
+import { applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import { StoreState } from "./actionTypes";
 import Routes from "./routes";
 
@@ -14,7 +16,7 @@ const initialStoreState: StoreState = {
   toDoList: []
 };
 
-export const store = createStore(combineReducers, initialStoreState);
+export const store = createStore(combineReducers, initialStoreState,   applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>

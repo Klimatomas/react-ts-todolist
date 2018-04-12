@@ -1,5 +1,6 @@
 import { ActionTypes } from "../../actionTypes";
-import { IToDo, TypeKeys } from "../../interfaces";
+import { TypeKeys } from "../../interfaces";
+import { IToDo } from "../../interfaces/todoInterface";
 
 export function toDoListReducer(toDoList: IToDo[] = [], action: ActionTypes) {
   switch (action.type) {

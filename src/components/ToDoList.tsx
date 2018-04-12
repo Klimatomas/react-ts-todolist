@@ -1,22 +1,24 @@
 import React = require("react");
 import { connect, Dispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { getCryptoActionCreator } from "../actions/cryptoActions";
 import {
   deleteToDoAction,
   submitNewToDoAction,
   toggleToDoAction
 } from "../actions/toDoListActions";
 import { ActionTypes, StoreState } from "../actionTypes";
-import { IToDo } from "../interfaces";
+import { IToDo } from "../interfaces/toDoInterface";
 import { mergeProps } from "../util/componentHelper";
 import EmptyToDoList from "./EmptyToDoList";
 import ListOfToDos from "./ListOfToDos";
-
 
 interface IToDoListProps {
   toDoList: IToDo[];
   submitNewTodo: (toDoList: IToDo[]) => void;
   toggleToDo: (toDoList: IToDo[]) => void;
   deleteToDo: (toDoList: IToDo[]) => void;
+  getCryptoAction: () => void;
 }
 
 interface IToDoListState {
@@ -38,6 +40,7 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
     super(props, state);
     this.toggleToDo = this.toggleToDo.bind(this);
     this.deleteToDo = this.deleteToDo.bind(this);
+    this.checkCrypto = this.checkCrypto.bind(this);
     this.handleFormInputChange = this.handleFormInputChange.bind(this);
   }
 
@@ -45,6 +48,9 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
     return (
       <>
         <div className="content">
+          <div onClick={this.checkCrypto}>
+            <Link to="/crypto">Check current crypto!</Link>
+          </div>
           {this.props.toDoList.length > 0 ? (
             <ListOfToDos
               toDoList={this.props.toDoList}
@@ -92,6 +98,10 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
     this.props.deleteToDo(currentToDoList);
   }
 
+  public checkCrypto() {
+    this.props.getCryptoAction();
+  }
+
   public submitNewTodo(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     let text = this.state.formState.todoText;
@@ -120,6 +130,7 @@ const mapStateToProps = (store: StoreState) => {
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) => {
   return {
     deleteToDo: (todoList: IToDo[]) => dispatch(deleteToDoAction(todoList)),
+    getCryptoAction: () => dispatch(getCryptoActionCreator()),
     submitNewTodo: (todoList: IToDo[]) =>
       dispatch(submitNewToDoAction(todoList)),
     toggleToDo: (todoList: IToDo[]) => dispatch(toggleToDoAction(todoList))

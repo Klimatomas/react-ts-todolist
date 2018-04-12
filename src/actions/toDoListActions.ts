@@ -1,5 +1,6 @@
 import { ActionTypes } from "../actionTypes";
-import { IToDo, TypeKeys } from "../interfaces";
+import { TypeKeys } from "../interfaces";
+import { IToDo } from "../interfaces/toDoInterface";
 
 export function submitNewToDoAction(newToDoArray: IToDo[]): ActionTypes { 
     return{
