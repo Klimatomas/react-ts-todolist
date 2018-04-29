@@ -10,6 +10,9 @@ body {
   display: flex;
   flex-direction: column;
 }
+td, th{
+  border: 1px solid;
+}
 
 .main {
   display: flex;

@@ -11,7 +11,7 @@ export enum TypeKeys{
 
 export interface IStoreInterface{
     toDoList: IToDo[],
-    coinInfo?: ICmcCoinInfo[]
+    cmcCoinInfo?: ICmcCoinInfo[]
 }
 
 

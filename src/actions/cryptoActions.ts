@@ -14,7 +14,6 @@ export function getCryptoActionCreator(): Dispatch<ActionTypes> {
 }
 
 export function getCryptoAction(coinInfo: ICmcCoinInfo[]): ActionTypes {
-    console.log("tusom");
   return {
     payload: coinInfo,
     type: TypeKeys.GET_CMC_DATA_ACTION

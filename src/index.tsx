@@ -11,6 +11,7 @@ import { applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { StoreState } from "./actionTypes";
 import Routes from "./routes";
+import { IStoreInterface } from "./interfaces";
 
 const initialStoreState: StoreState = {
   toDoList: []
