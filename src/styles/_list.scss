@@ -8,12 +8,15 @@
   }
   &__item {
     cursor: pointer;
-    position: relative;
-    word-wrap: break-word;
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-bottom: 5px;
     border-bottom: 1px solid $color-primary;
     &.true {
       // todo remove
+    //   text-decoration: line-through;     
       border-bottom: 1px solid limegreen;
     }
     &--delete {
@@ -22,15 +25,14 @@
     &--complete {
       background-color: greenyellow;
     }
-    &:hover > .content__options{
-        opacity: 1;
-        z-index: 1;
+    &:hover > .content__options {
+      opacity: 1;
+      z-index: 1;
     }
   }
   &__options {
+    flex: 0 0 auto;
     opacity: 0;
-    position: absolute;
-    right: 0;
     & > span {
       padding: 0 5px 0 5px;
     }
