@@ -12,7 +12,8 @@
         "jsx-no-braces-for-string-attributes": true,
         "no-console": false,
         "no-unused-expression": [true, "allow-fast-null-checks"],
-        "quotemark":true
+        "quotemark":true,
+        "ordered-imports": false
     },
     "rulesDirectory": [
         "./node_modules/tslint-misc-rules/rules"

@@ -1,10 +1,8 @@
 import { combineReducers } from "redux";
-import { toDoListReducer } from "./toDoList/toDoListReducer";
+import { toDoListReducer } from "./todo/toDoListReducer";
 import { getCmcCoinInfoReducer } from "./crypto/cryptoReducer";
 
-export default combineReducers(
-    {
-        toDoList: toDoListReducer,
-        cmcCoinInfo: getCmcCoinInfoReducer
-    }
-)
+export default combineReducers({
+  cmcCoinInfo: getCmcCoinInfoReducer,
+  toDoList: toDoListReducer
+});

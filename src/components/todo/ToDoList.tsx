@@ -1,17 +1,17 @@
 import React = require("react");
 import { connect, Dispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getCryptoActionCreator } from "../actions/cryptoActions";
+import EmptyToDoList from "./EmptyToDoList";
+import ListOfToDos from "./ListOfToDos";
+import { IToDo } from "../../interfaces/toDoInterface";
+import { StoreState, ActionTypes } from "../../actionTypes";
 import {
   deleteToDoAction,
   submitNewToDoAction,
   toggleToDoAction
-} from "../actions/toDoListActions";
-import { ActionTypes, StoreState } from "../actionTypes";
-import { IToDo } from "../interfaces/toDoInterface";
-import { mergeProps } from "../util/componentHelper";
-import EmptyToDoList from "./EmptyToDoList";
-import ListOfToDos from "./ListOfToDos";
+} from "../../actions/toDoListActions";
+import { getCryptoActionCreator } from "../../actions/cryptoActions";
+import { mergeProps } from "../../util/componentHelper";
 
 interface IToDoListProps {
   toDoList: IToDo[];
@@ -46,34 +46,32 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
 
   public render() {
     return (
-      <>
-        <div className="content">
-          <div onClick={this.checkCrypto}>
-            <Link to="/crypto">Check current crypto!</Link>
-          </div>
-          {this.props.toDoList.length > 0 ? (
-            <ListOfToDos
-              toDoList={this.props.toDoList}
-              toggleToDo={this.toggleToDo}
-              deleteToDo={this.deleteToDo}
-            />
-          ) : (
-            <EmptyToDoList />
-          )}
-          {/* todo validation */}
-          <form onSubmit={e => this.submitNewTodo(e)} className="content__form">
-            <input
-              autoFocus
-              type="text"
-              onChange={e => this.handleFormInputChange(e)}
-              value={this.state.formState.todoText}
-            />
-            <button className="btn" type="submit">
-              Add to plan
-            </button>
-          </form>
+      <div className="content">
+        <div onClick={this.checkCrypto}>
+          <Link to="/crypto">Check current crypto!</Link>
         </div>
-      </>
+        {this.props.toDoList.length > 0 ? (
+          <ListOfToDos
+            toDoList={this.props.toDoList}
+            toggleToDo={this.toggleToDo}
+            deleteToDo={this.deleteToDo}
+          />
+        ) : (
+          <EmptyToDoList />
+        )}
+        {/* todo validation */}
+        <form onSubmit={e => this.submitNewTodo(e)} className="content__form">
+          <input
+            autoFocus
+            type="text"
+            onChange={e => this.handleFormInputChange(e)}
+            value={this.state.formState.todoText}
+          />
+          <button className="btn" type="submit">
+            Add to plan
+          </button>
+        </form>
+      </div>
     );
   }
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import ToDoList from "../components/ToDoList";
+import ToDoList from "../components/todo/ToDoList";
 
 const ToDoListMain = () => <ToDoList />;
 
