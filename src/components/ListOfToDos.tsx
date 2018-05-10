@@ -1,43 +1,82 @@
-import React = require("react");
+import React from "react";
 import { IToDo } from "../interfaces";
 
 interface IListOfToDosProps {
   toDoList: IToDo[];
   toggleToDo: (index: number) => void;
-  deleteToDo: (index: number) => void;
+  deleteToDo: (index: number, e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-class ListOfToDos extends React.Component<IListOfToDosProps, {}> {
+interface IStateOfToDos {
+  showActive: boolean;
+  showCompleted: boolean;
+}
+
+const initialTodoListState: IStateOfToDos = {
+  showActive: true,
+  showCompleted: true
+};
+
+class ListOfToDos extends React.Component<IListOfToDosProps, IStateOfToDos> {
+  public state = initialTodoListState;
+
   public render() {
     return (
-      <>
-        <h4>Your ToDos. Click on one to mark it complete!</h4>
-        <ul className="content__list">
-          {this.props.toDoList.map((val, index) => (
-            <React.Fragment key={index}>
-              <li className={"content__item ".concat(val.completed.toString())}>
-                {val.content}
-                <div className="content__options">
-                  <span
-                    className="content__item--complete"
-                    onClick={() => this.props.toggleToDo(index)}
-                  >
-                    {val.completed ? "mark as active" : "mark as complete"}
-                  </span>
-
-                  <span
-                    className="content__item--delete"
-                    onClick={() => this.props.deleteToDo(index)}
-                  >
-                    delete
-                  </span>
+      this.props.toDoList.length > 0 && (
+        <>
+          <div>
+            {/* todo export as const */}
+            <input
+              type="checkbox"
+              name="Show Completed"
+              id="showCompleted"
+              checked={this.state.showCompleted}
+              onChange={e => this.changeCheckbox(e)}
+            />
+            <label htmlFor="showCompleted">Show Completed</label>
+            <input
+              type="checkbox"
+              name="Show Active"
+              id="showActive"
+              checked={this.state.showActive}
+              onChange={e => this.changeCheckbox(e)}
+            />
+            <label htmlFor="showActive">Show Active</label>
+          </div>
+          <ul className="content__list">
+            <li className="content__header">
+              <span>Task</span>
+              <span>Date inserted</span>
+            </li>
+            {this.props.toDoList.map((val, index) => (
+              // rework to cssGrid instead of flexbox
+              <li
+                key={index}
+                className={"content__item ".concat(val.completed.toString())}
+                onClick={() => this.props.toggleToDo(index)}
+                hidden={
+                  (val.completed === true && this.state.showCompleted === false) ||
+                  (val.completed === false && this.state.showActive === false)
+                }
+              >
+                <span>{val.content}</span>
+                <span>{val.dateInserted.toLocaleString(navigator.language)}</span>
+                <div className="placeholder" onClick={e => this.props.deleteToDo(index, e)}>
+                  XXXX
                 </div>
               </li>
-            </React.Fragment>
-          ))}
-        </ul>
-      </>
+            ))}
+          </ul>
+        </>
+      )
     );
+  }
+
+  public changeCheckbox(e: React.ChangeEvent<HTMLInputElement>) {
+    this.setState({
+      ...this.state,
+      [e.target.id]: e.target.checked
+    });
   }
 }
 
