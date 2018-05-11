@@ -6,7 +6,9 @@
         "module": "commonjs",
         "target": "es6",
         "jsx": "react",
-        "alwaysStrict": true
+        "alwaysStrict": true,
+        "esModuleInterop": true,
+        "pretty": true
     },
     "include": [
         "./src/**/*"

@@ -8,31 +8,32 @@
   }
   &__item {
     cursor: pointer;
-    position: relative;
-    word-wrap: break-word;
+    text-transform: capitalize;
     margin-bottom: 5px;
     border-bottom: 1px solid $color-primary;
+    
+    span:nth-child(2) {
+      float: right;
+    }
+
     &.true {
-      // todo remove
+      //  todo rework naming here (true?)
+      text-decoration: line-through;
       border-bottom: 1px solid limegreen;
     }
-    &--delete {
-      background-color: #ff9c9c;
-    }
-    &--complete {
-      background-color: greenyellow;
-    }
-    &:hover > .content__options{
-        opacity: 1;
-        z-index: 1;
+  }
+  &__header {
+    cursor: default;
+    text-transform: capitalize;
+    margin-bottom: 5px;
+    border-bottom: 3px solid darken($color-primary, 30%);
+    
+    span:nth-child(2) {
+      float: right;
     }
   }
-  &__options {
-    opacity: 0;
-    position: absolute;
-    right: 0;
-    & > span {
-      padding: 0 5px 0 5px;
-    }
-  }
+}
+//  todo remake
+.placeholder{
+  display: inline-block;
 }

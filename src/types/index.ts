@@ -1,4 +1,4 @@
-import {IDeleteTodoAction, IStoreInterface, ISubmitNewTodoAction, IToggleToDoAction} from "../interfaces"
+import {IStoreInterface, ISubmitNewTodoAction, IToggleToDoAction, IDeleteTodoAction} from "../interfaces"
 
 export type StoreState = IStoreInterface;
 

@@ -7,7 +7,7 @@ import combineReducers from "./reducers/index";
 
 import { Provider } from "react-redux";
 
-import { StoreState } from "./actionTypes";
+import { StoreState } from "./types";
 import Routes from "./routes";
 
 const initialStoreState: StoreState = {

@@ -1,22 +1,22 @@
-import { ActionTypes } from "../actionTypes";
+import { ActionTypes } from "../types";
 import { IToDo, TypeKeys } from "../interfaces";
 
-export function submitNewToDoAction(newToDoArray: IToDo[]): ActionTypes { 
+export function toggleToDoAction(index: number): ActionTypes { 
     return{
-        payload: newToDoArray,
+        payload: index,
+        type: TypeKeys.TOGGLE_TODO_ACTION,
+    }
+}
+export function submitNewToDoAction(todo: IToDo): ActionTypes { 
+    return{
+        payload: todo,
         type: TypeKeys.SUBMIT_NEW_TODO_ACTION,
     }
 }
 
-export function toggleToDoAction(newToDoArray: IToDo[]): ActionTypes { 
+export function deleteToDoAction(index: number): ActionTypes { 
     return{
-        payload: newToDoArray,
-        type: TypeKeys.TOGGLE_TODO_ACTION,
-    }
-}
-export function deleteToDoAction(newToDoArray: IToDo[]): ActionTypes { 
-    return{
-        payload: newToDoArray,
-        type: TypeKeys.TOGGLE_TODO_ACTION,
+        payload: index,
+        type: TypeKeys.DELETE_TODO_ACTION,
     }
 }

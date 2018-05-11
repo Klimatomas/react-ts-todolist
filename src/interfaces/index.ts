@@ -5,7 +5,7 @@ export enum TypeKeys{
 }
 
 export interface IToDo{
-    dateInserted: string,
+    dateInserted: Date,
     content: string,
     completed: boolean,
 }
@@ -16,15 +16,15 @@ export interface IStoreInterface{
 
 export interface ISubmitNewTodoAction {
     type: TypeKeys.SUBMIT_NEW_TODO_ACTION;
-    payload: IToDo[];
+    payload: IToDo;
 }
 
 export interface IToggleToDoAction{
     type: TypeKeys.TOGGLE_TODO_ACTION;
-    payload: IToDo[];
+    payload: number;
 }
 
 export interface IDeleteTodoAction{
     type: TypeKeys.DELETE_TODO_ACTION;
-    payload: IToDo[];
+    payload: number;
 }
