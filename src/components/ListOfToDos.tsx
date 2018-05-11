@@ -77,6 +77,7 @@ class ListOfToDos extends React.Component<IListOfToDosProps, IStateOfToDos> {
   public changeCheckbox(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       ...this.state,
+      //  rework, dont use ids
       [e.target.id]: e.target.checked
     });
   }

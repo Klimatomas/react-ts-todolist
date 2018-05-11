@@ -10,6 +10,7 @@ import { ActionTypes, StoreState } from "../types";
 import { mergeProps } from "../util/componentHelper";
 import ListOfToDos from "./ListOfToDos";
 
+
 interface IToDoListProps {
   toDoList: IToDo[];
   submitNewTodo: (toDoList: IToDo) => void;

@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: ["babel-polyfill", "./src/index.tsx"],
@@ -6,17 +7,21 @@ module.exports = {
     filename: "bundle.js",
     path: __dirname + "/dist"
   },
-  plugins: [new HtmlWebpackPlugin({
-    template: "index.html",
-    title: "ts-react-todolist"
-  })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "index.html",
+      title: "ts-react-todolist"
+    }),
+    new ExtractTextPlugin("styles.css")
+  ],
   // Enable sourcemaps for debugging webpack's output.
   devtool: "source-map",
 
   devServer: {
     contentBase: "./dist",
     hot: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: { "/": "http://localhost:5000" }
   },
 
   resolve: {
@@ -29,21 +34,20 @@ module.exports = {
       { test: /\.tsx?$/, use: ["babel-loader", "ts-loader"] },
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
-
       // Sass handling
       {
-        test: /\.(scss)$/,
-        use: [
-          {
-            loader: "style-loader" // inject CSS to page
-          },
-          {
-            loader: "css-loader" // translates CSS into CommonJS modules
-          },
-          {
-            loader: "sass-loader" // compiles Sass to CSS
-          }
-        ]
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        })
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       }
     ]
   }
