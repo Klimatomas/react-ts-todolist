@@ -1,5 +1,4 @@
-import React = require("react");
-
+import React from "react";
 class Footer extends React.Component<{}, {}> {
   public render() {
     return <footer className="app-footer">something footer-ish</footer>;

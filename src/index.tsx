@@ -1,5 +1,5 @@
 import "babel-polyfill";
-import * as React from "react";
+import React from "react";
 import * as ReactDOM from "react-dom";
 import { createStore } from "redux";
 import "../src/styles/index.scss";

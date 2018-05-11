@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import ToDoList from "../components/ToDoList";
 
 const ToDoListMain = () => <ToDoList />;
