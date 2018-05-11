@@ -1,4 +1,4 @@
-import { ActionTypes } from "../../actionTypes";
+import { ActionTypes } from "../../types";
 import { IToDo, TypeKeys } from "../../interfaces";
 import { constants } from "perf_hooks";
 

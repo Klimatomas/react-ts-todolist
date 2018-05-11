@@ -4,7 +4,7 @@ import { IToDo } from "../interfaces";
 interface IListOfToDosProps {
   toDoList: IToDo[];
   toggleToDo: (index: number) => void;
-  deleteToDo: (index: number, e: React.MouseEvent<HTMLDivElement>) => void;
+  deleteToDo: (index: number, e: React.MouseEvent<HTMLSpanElement>) => void;
 }
 
 interface IStateOfToDos {
@@ -49,7 +49,8 @@ class ListOfToDos extends React.Component<IListOfToDosProps, IStateOfToDos> {
               <span>Date inserted</span>
             </li>
             {this.props.toDoList.map((val, index) => (
-              // rework to cssGrid instead of flexbox
+              // rework to cssGrid instead of flexbox todo
+              // divide into headers and table? might be readable
               <li
                 key={index}
                 className={"content__item ".concat(val.completed.toString())}
@@ -59,11 +60,12 @@ class ListOfToDos extends React.Component<IListOfToDosProps, IStateOfToDos> {
                   (val.completed === false && this.state.showActive === false)
                 }
               >
+                {/* should be way nicer */}
                 <span>{val.content}</span>
                 <span>{val.dateInserted.toLocaleString(navigator.language)}</span>
-                <div className="placeholder" onClick={e => this.props.deleteToDo(index, e)}>
-                  XXXX
-                </div>
+                <span className="btn placeholder" onClick={e => this.props.deleteToDo(index, e)}>
+                  Delete
+                </span>
               </li>
             ))}
           </ul>

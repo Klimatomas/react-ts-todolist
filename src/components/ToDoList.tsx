@@ -1,12 +1,12 @@
 import React from "react";
 import { Dispatch, connect } from "react-redux";
-import { ActionTypes, StoreState } from "../actionTypes";
 import {
   deleteToDoAction,
   submitNewToDoAction,
   toggleToDoAction
 } from "../actions/toDoListActions";
 import { IToDo } from "../interfaces";
+import { ActionTypes, StoreState } from "../types";
 import { mergeProps } from "../util/componentHelper";
 import ListOfToDos from "./ListOfToDos";
 
@@ -68,6 +68,7 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
   public handleFormInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       ...this.state,
+      // rework ... interface? todo
       todoText: e.target.value
     });
   }
@@ -76,7 +77,7 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
     this.props.toggleToDo(index);
   }
 
-  public deleteToDo(index: number, e: React.MouseEvent<HTMLDivElement>) {
+  public deleteToDo(index: number, e: React.MouseEvent<HTMLSpanElement>) {
     e.stopPropagation();
     this.props.deleteToDo(index);
   }
