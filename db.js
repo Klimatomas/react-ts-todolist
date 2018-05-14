@@ -5,9 +5,11 @@ module.exports = {
   getTodos
 };
 
-const username = process.env.DB_USERNAME;
-const password = process.env.DB_PASSWORD;
-const dburl = process.env.DB_URL;
+if (process.env.NODE_ENV === "production") {
+  const username = process.env.DB_USERNAME;
+  const password = process.env.DB_PASSWORD;
+  const dburl = process.env.DB_URL;
+}
 
 const todoSchema = mongoose.Schema({
   completed: Boolean,
@@ -21,14 +23,16 @@ function createConnection() {
   const url = `mongodb+srv://${username}:${password}@${dburl}`;
   mongoose.connect(url);
   var db = mongoose.connection;
-  db.on("error", console.error.bind(console, "connection error:"));
+  db.on("error", error => {
+    console.error("failed to connect to db " + DB_URL);
+  });
   db.once("open", function() {
     console.log("opened!");
   });
 }
 
 function terminateConnection() {
-  mongoose.disconnect();
+  mongoose.connection.close();
 }
 
 function getTodos(callback) {
