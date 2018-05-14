@@ -8,7 +8,15 @@ module.exports = {
 const username = process.env.DB_USERNAME;
 const password = process.env.DB_PASSWORD;
 const dburl = process.env.DB_URL;
-
+const url = `mongodb+srv://${username}:${password}@${dburl}`;
+mongoose.connect(url);
+const db = mongoose.connection;
+db.on("error", error => {
+  console.error("failed to connect to db " + DB_URL);
+});
+db.once("open", function() {
+  console.log("opened!");
+});
 const todoSchema = mongoose.Schema({
   completed: Boolean,
   text: String,
@@ -18,8 +26,6 @@ const todoSchema = mongoose.Schema({
 const Todo = mongoose.model("Todo", todoSchema);
 
 function createConnection() {
-  const url = `mongodb+srv://${username}:${password}@${dburl}`;
-  mongoose.connect(url);
   var db = mongoose.connection;
   db.on("error", error => {
     console.error("failed to connect to db " + DB_URL);
@@ -34,7 +40,6 @@ function terminateConnection() {
 }
 
 function getTodos(callback) {
-  createConnection();
   const query = Todo.find({ userID: 1 });
   query
     .exec()
@@ -47,3 +52,10 @@ function getTodos(callback) {
       callback("an error occured, please try again later");
     });
 }
+
+process.on("SIGINT", function() {
+  mongoose.connection.close(function() {
+    console.log("Mongoose disconnected on app termination");
+    process.exit(0);
+  });
+});
