@@ -5,11 +5,9 @@ module.exports = {
   getTodos
 };
 
-if (process.env.NODE_ENV === "production") {
-  const username = process.env.DB_USERNAME;
-  const password = process.env.DB_PASSWORD;
-  const dburl = process.env.DB_URL;
-}
+const username = process.env.DB_USERNAME;
+const password = process.env.DB_PASSWORD;
+const dburl = process.env.DB_URL;
 
 const todoSchema = mongoose.Schema({
   completed: Boolean,
