@@ -45,8 +45,5 @@ function getTodos(callback) {
     .catch(error => {
       console.log(error);
       callback("an error occured, please try again later");
-    })
-    .then(() => {
-      terminateConnection();
     });
 }
