@@ -2,16 +2,11 @@
 require('dotenv').config()
 const express = require("express");
 const db = require("./db");
+const port = process.env.PORT || 5000;
 
 app = express();
 
-if (process.env.NODE_ENV === "production") {
-  var serveStatic = require("serve-static");
-  app.use(serveStatic(__dirname + "/dist"));
-}
-
-var port = process.env.PORT || 5000;
-
+app.use(express.static(__dirname + "/../dist"));
 app.use(express.json());
 app.use(require('./controllers'))
 
