@@ -1,10 +1,6 @@
 import React from "react";
-import { Dispatch, connect } from "react-redux";
-import {
-  deleteToDoAction,
-  submitNewToDoAction,
-  toggleToDoAction
-} from "../actions/toDoListActions";
+import { connect, Dispatch } from "react-redux";
+import { deleteToDoAction, submitNewToDoAction, toggleToDoAction } from "../actions/toDoListActions";
 import { IToDo } from "../interfaces";
 import { ActionTypes, StoreState } from "../types";
 import { mergeProps } from "../util/componentHelper";
@@ -31,9 +27,6 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
 
   constructor(props: IToDoListProps, state: IToDoListState) {
     super(props, state);
-    this.toggleToDo = this.toggleToDo.bind(this);
-    this.deleteToDo = this.deleteToDo.bind(this);
-    this.handleFormInputChange = this.handleFormInputChange.bind(this);
   }
 
   public render() {
@@ -74,16 +67,16 @@ class ToDoList extends React.Component<IToDoListProps, IToDoListState> {
     });
   }
 
-  public toggleToDo(index: number) {
+  public toggleToDo = (index: number) => {
     this.props.toggleToDo(index);
   }
 
-  public deleteToDo(index: number, e: React.MouseEvent<HTMLSpanElement>) {
+  public deleteToDo = (index: number, e: React.MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation();
     this.props.deleteToDo(index);
   }
 
-  public submitNewTodo(e: React.FormEvent<HTMLFormElement>) {
+  public submitNewTodo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newToDo: IToDo = {
       completed: false,
