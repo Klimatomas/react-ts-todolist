@@ -3,6 +3,6 @@ export const mergeProps = (
     dispatchProps: any | void,
     ownProps: any | void
   ) => {
-    return Object.assign({}, ownProps, stateProps, dispatchProps);
+    return Object.assign({...ownProps, ...stateProps, ...dispatchProps});
   };
   
